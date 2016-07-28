@@ -13,18 +13,16 @@ import pprint
 def valid_offers():
 	engine = create_engine('mysql+pymysql://root@localhost/primary_data')
 	query_valid_offers='''
-			 SELECT 
-			 o.id as offer_id,
-			 o.hotel_id,
-			 o.sellings_price, 
-			 o.sellings_price as original_price,
-			 lst_currency.code as original_currency_code,
-			 o.breakfast_included_flag,
-			 o.offer_valid_from as valid_from_date,
-			 o.offer_valid_to as valid_to_date
-			 from offer o
-			 join lst_currency on o.currency_id=lst_currency.id
-			 limit 10 
+			 SELECT o.id AS offer_id,
+       o.hotel_id,
+       o.sellings_price,
+       o.sellings_price AS original_price,
+       lst_currency.code AS original_currency_code,
+       o.breakfast_included_flag,
+       o.offer_valid_from AS valid_from_date,
+       o.offer_valid_to AS valid_to_date
+FROM offer o
+JOIN lst_currency ON o.currency_id=lst_currency.id LIMIT 10
 		 '''
 	print (query_valid_offers)
 	df = pd.read_sql_query(query_valid_offers, engine)
@@ -33,14 +31,15 @@ def valid_offers():
 def hotel_offers():
 	engine = create_engine('mysql+pymysql://root@localhost/primary_data')
 	query_hotel_offers='''
-		
-			 
+		 SELECT o.hotel_id AS hotel_id,
+       DATE(o.offer_valid_from) AS date,
+       hour(o.offer_valid_from) AS hour,
+       o.breakfast_included_flag,
+       o.valid_offer_flag
+FROM offer o
+WHERE TO_SECONDS(o.offer_valid_to) - TO_SECONDS(o.offer_valid_from) < 3600 LIMIT 1000
 		 '''
 	print (query_hotel_offers)
 	df = pd.read_sql_query(query_hotel_offers, engine)
 	return df 
-
-
-
-
 
