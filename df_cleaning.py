@@ -13,35 +13,6 @@ import csv
 import pprint
 
 
-offer=pd.read_csv('offer.csv')
-
-offer.columns = ['id',
-			'hotel_id',
-			'currency_id',
-			'source_system_code', 
-			'available_cnt', 
-			'sellings_price',
-			'checkin_date',
-			'checkout_date',
-			'valid_offer_flag', 
-			'offer_valid_from',
-			'offer_valid_to', 
-			'breakfast_included_flag', 
-			'insert_datetime' ]
-
-offer.describe()
-
-# check how many NaN in columns in dataframe
-
-
-offer.isnull().sum()
-
-'''
-
-possible columns need to be cleaned : 
-csv offer: offer['sellings_price'] , df['offer_valid_to'], 
-
-'''
 
 
 
