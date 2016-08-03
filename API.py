@@ -42,17 +42,19 @@ def API_test():
 
 
 
-def API_run(offerId):
+def API_run(hotel_id):
 	try:
 		conn= pymysql.connect(user='root',db='primary_data')
 		a=conn.cursor()
-		sql="select * from offer where id = '{offerId}' limit 10 ; "
-		sql=sql.format(offerId=offerId)
+		sql="select * from offer where hotel_id = '{hotel_id}' limit 10 ; "
+		sql=sql.format(hotel_id=hotel_id)
 		a.execute(sql)
 		rows = a.fetchall()
+		data={}
 		for row in range(len(rows)):
 			print ({'offerId':rows[row][1],'hotelId':rows[row][2],'checkinDate':rows[row][7],'checkoutDate':rows[row][8],'sellingPrice':rows[row][6],'currencyCode':rows[row][3]})
-		
+			data[row]={'offerId':rows[row][1],'hotelId':rows[row][2],'checkinDate':rows[row][7],'checkoutDate':rows[row][8],'sellingPrice':rows[row][6],'currencyCode':rows[row][3]}
+		return data
 	except:
 		print ('MySQL connect failed')
 
