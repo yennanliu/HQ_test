@@ -6,9 +6,9 @@ from flask import jsonify
 app = Flask(__name__)
 
 
-@app.route('/<hotel_id>')
-def test2(hotel_id):
-	offer_data = API_run(hotel_id)
+@app.route('/hotelId=<hotel_id>&checkin_date=<checkin_date>&checkout_date=<checkout_date>')
+def test2(hotel_id,checkin_date,checkout_date):
+	offer_data = API_run(hotel_id,checkin_date,checkout_date)
 	
 	try:
 		
