@@ -12,6 +12,7 @@ import pprint
 
 def valid_offers():
 	engine = create_engine('mysql+pymysql://root@localhost/primary_data')
+	engine_ = create_engine('mysql+pymysql://root@localhost/bi_data')
 	query_valid_offers='''
 			 SELECT o.id AS offer_id,
        o.hotel_id,
@@ -26,10 +27,12 @@ JOIN lst_currency ON o.currency_id=lst_currency.id LIMIT 10
 		 '''
 	print (query_valid_offers)
 	df = pd.read_sql_query(query_valid_offers, engine)
+	df.to_sql('valid_offers', engine_, if_exists = 'append') 
 	return df 
 
 def hotel_offers():
 	engine = create_engine('mysql+pymysql://root@localhost/primary_data')
+	engine_ = create_engine('mysql+pymysql://root@localhost/bi_data')
 	query_hotel_offers='''
 		 SELECT o.hotel_id AS hotel_id,
        DATE(o.offer_valid_from) AS date,
@@ -41,5 +44,6 @@ WHERE TO_SECONDS(o.offer_valid_to) - TO_SECONDS(o.offer_valid_from) < 3600 LIMIT
 		 '''
 	print (query_hotel_offers)
 	df = pd.read_sql_query(query_hotel_offers, engine)
+	df.to_sql('hotel_offers', engine_, if_exists = 'append') 
 	return df 
 
