@@ -42,12 +42,12 @@ def API_test():
 
 
 
-def API_run(hotel_id):
+def API_run(hotel_id,checkin_date,checkout_date):
 	try:
 		conn= pymysql.connect(user='root',db='primary_data')
-		a=conn.cursor()
-		sql="select * from offer where hotel_id = '{hotel_id}' limit 10 ; "
-		sql=sql.format(hotel_id=hotel_id)
+		a=conn.cursor() 
+		sql="select * from offer where hotel_id = '{hotel_id}' and checkin_date ='{checkin_date}' and checkout_date= '{checkout_date}'; "
+		sql=sql.format(hotel_id=hotel_id,checkin_date=checkin_date,checkout_date=checkout_date)
 		a.execute(sql)
 		rows = a.fetchall()
 		data={}
@@ -57,6 +57,10 @@ def API_run(hotel_id):
 		return data
 	except:
 		print ('MySQL connect failed')
+
+
+
+
 
 
 
