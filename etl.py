@@ -23,7 +23,7 @@ def valid_offers():
        o.offer_valid_from AS valid_from_date,
        o.offer_valid_to AS valid_to_date
 FROM offer o
-JOIN lst_currency ON o.currency_id=lst_currency.id LIMIT 10
+JOIN lst_currency ON o.currency_id=lst_currency.id 
 		 '''
 	print (query_valid_offers)
 	df = pd.read_sql_query(query_valid_offers, engine)
@@ -40,7 +40,7 @@ def hotel_offers():
        o.breakfast_included_flag,
        o.valid_offer_flag
 FROM offer o
-WHERE TO_SECONDS(o.offer_valid_to) - TO_SECONDS(o.offer_valid_from) < 3600 LIMIT 1000
+WHERE TO_SECONDS(o.offer_valid_to) - TO_SECONDS(o.offer_valid_from) < 3600 
 		 '''
 	print (query_hotel_offers)
 	df = pd.read_sql_query(query_hotel_offers, engine)
