@@ -54,7 +54,15 @@ step 2 : launch MySQL server :
 $ mysql.server start
 ```
 
-step 3 : clone the repo :
+step 3 : login MySQL and exit :
+
+```
+$ mysql -u root
+mysql> 
+mysql>exit 
+
+```
+step 4 : clone the repo :
 
 ```
 $ git clone https://github.com/yennanliu/HQ_test
