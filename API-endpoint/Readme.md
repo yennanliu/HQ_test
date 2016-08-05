@@ -16,3 +16,10 @@ http://0.0.0.0:5000/hotelId=<hotel_id>&checkin_date=<checkin_date>&checkout_date
 ```
 
 
+for example, if you input 
+
+```
+http://0.0.0.0:5000/hotelId=11&checkin_date=2012-11-21&checkout_date=2012-11-22
+```
+
+then you will get as response 
