@@ -8,7 +8,7 @@ checkinDate
 checkoutDate 
 ```
 
-and using them into API format below 
+and put them into as url as API format below 
 
 ```
 http://0.0.0.0:5000/hotelId=<hotel_id>&checkin_date=<checkin_date>&checkout_date=<checkout_date>
