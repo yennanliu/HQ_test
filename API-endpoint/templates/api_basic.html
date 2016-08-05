@@ -1,0 +1,6 @@
+{% for l in offer_data.itervalues() %}
+<div class="link">
+    <a href="{{ l.url }}"> {{l.title}}</a>
+    <img src="{{ l.img }}" width="100" height="100">
+</div>
+{% endfor %}
